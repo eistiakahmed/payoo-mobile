@@ -113,8 +113,9 @@ document
       button.style.backgroundColor = "green";
     } else {
       alert("Coupon Code Invalid");
+      
     }
-    couponCode.value = "";
+    document.getElementById("coupon-code").value = "";
   });
 
 // Pay Bill
@@ -145,7 +146,7 @@ document
     const newAvailableBalance = availableBalance - amountToPay;
     document.getElementById("available-balance").innerText =
       newAvailableBalance;
-      
+
       // remove input info
     document.getElementById("pay-bill").value = "";
     document.getElementById("pay-account").value = "";
