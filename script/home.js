@@ -38,6 +38,7 @@ document
   .getElementById("cashout-main-btn")
   .addEventListener("click", function (event) {
     event.preventDefault();
+    const validPin = 1971;
     // console.log("Cashout is working")
     const agentNumber = document.getElementById("agent-number").value;
     const amountWithdraw = parseInt(
@@ -48,6 +49,15 @@ document
     const availableBalance = parseInt(
       document.getElementById("available-balance").innerText
     );
+    if (agentNumber.length !== 11) {
+      alert("please enter the valid number");
+      return;
+    }
+
+    if (validPin !== agentPin) {
+      alert("Please provide valid pin");
+      return;
+    }
 
     const newAvailableBalance = availableBalance - amountWithdraw;
     document.getElementById("available-balance").innerText =
@@ -59,14 +69,88 @@ document
   .getElementById("send-money-btn")
   .addEventListener("click", function (event) {
     event.preventDefault();
+    const validPin = 1971;
+    const userAccountNumber = document.getElementById(
+      "user-account-number"
+    ).value;
     const transferAmount = parseInt(
       document.getElementById("transfer-amount").value
     );
     const availableBalance = parseInt(
       document.getElementById("available-balance").innerText
     );
+    const tranferPin = parseInt(document.getElementById("transfer-pin").value);
+    if (userAccountNumber.length !== 11) {
+      alert("please enter the valid number");
+      return;
+    }
+
+    if (validPin !== tranferPin) {
+      alert("Please provide valid pin");
+      return;
+    }
     const newAvailableBalance = availableBalance - transferAmount;
-    document.getElementById("available-balance").innerText = newAvailableBalance;
+    document.getElementById("available-balance").innerText =
+      newAvailableBalance;
+  });
+
+// get bonus
+document
+  .getElementById("get-bonus-btn")
+  .addEventListener("click", function (event) {
+    event.preventDefault();
+    const secretCouponCode = "EISTIAK@!!";
+    const button = document.getElementById("get-bonus-btn");
+    const couponCode = document.getElementById("coupon-code").value;
+    const availableBalance = parseInt(
+      document.getElementById("available-balance").innerText
+    );
+    if (secretCouponCode === couponCode) {
+      const newAvailableBalance = availableBalance + 10000;
+      document.getElementById("available-balance").innerHTML =
+        newAvailableBalance;
+      button.innerText = "Congratulations you got the Bonus 🎉";
+      button.style.backgroundColor = "green";
+    } else {
+      alert("Coupon Code Invalid");
+    }
+    couponCode.value = "";
+  });
+
+// Pay Bill
+document
+  .getElementById("pay-bill-button")
+  .addEventListener("click", function (event) {
+    event.preventDefault();
+    const pinValid = 1971;
+    const payBill = document.getElementById("pay-bill").value;
+    const payAccount = document.getElementById("pay-account").value;
+    const amountToPay = parseInt(
+      document.getElementById("amount-to-pay").value
+    );
+    const paybillPin = parseInt(document.getElementById("paybill-pin").value);
+    const availableBalance = parseInt(
+      document.getElementById("available-balance").innerText
+    );
+
+    if (payAccount.length !== 11) {
+      alert("please enter the valid number");
+      return;
+    }
+
+    if (paybillPin !== pinValid) {
+      alert("Please provide valid pin");
+      return;
+    }
+    const newAvailableBalance = availableBalance - amountToPay;
+    document.getElementById("available-balance").innerText =
+      newAvailableBalance;
+      
+      // remove input info
+    document.getElementById("pay-bill").value = "";
+    document.getElementById("pay-account").value = "";
+    document.getElementById("amount-to-pay").value = "";
+    document.getElementById("paybill-pin").value = "";
   });
 
 // toggling feature
